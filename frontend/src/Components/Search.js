@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-function Search() {
+const Search = () => {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
 
   const handleSearch = async () => {
     try {
       const response = await axios.get(`http://localhost:3001/api/search?q=${query}`);
+      console.log(response.data);
       setResults(response.data);
     } catch (error) {
       console.error('Error fetching search results', error);
@@ -23,11 +24,14 @@ function Search() {
         placeholder="Search Wikipedia"
       />
       <button onClick={handleSearch}>Search</button>
-      <ul>
+      <div>
         {results.map((result) => (
-          <li key={result.pageid}>{result.title}</li>
+          <div key={result.pageid} style={{ border: '1px solid black', padding: '10px', margin: '10px' }}>
+            <p style={{ fontSize: '20px', fontWeight: 'bold' }}>{result.title}</p>
+            <div dangerouslySetInnerHTML={{ __html: result.snippet }}></div>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }
