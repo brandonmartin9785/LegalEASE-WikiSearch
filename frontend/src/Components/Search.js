@@ -8,7 +8,6 @@ const Search = () => {
   const handleSearch = async () => {
     try {
       const response = await axios.get(`http://localhost:3001/api/search?q=${query}`);
-      console.log(response.data);
       setResults(response.data);
     } catch (error) {
       console.error('Error fetching search results', error);
