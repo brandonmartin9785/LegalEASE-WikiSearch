@@ -1,10 +1,10 @@
 const express = require('express');
 const dotenv = require('dotenv');
+dotenv.config();
+
 const cors = require('cors');
 const searchRoutes = require('./routes/search');
 const historyRoutes = require('./routes/history');
-
-dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3001;

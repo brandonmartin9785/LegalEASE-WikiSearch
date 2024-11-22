@@ -9,6 +9,8 @@ const Search = () => {
     try {
       const response = await axios.get(`http://localhost:3001/api/search?q=${query}`);
       setResults(response.data);
+
+      await axios.post('http://localhost:3001/api/history', { query });
     } catch (error) {
       console.error('Error fetching search results', error);
     }

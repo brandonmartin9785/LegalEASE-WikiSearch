@@ -9,7 +9,14 @@ const db = mysql.createConnection({
 
 const saveSearchQuery = (query, callback) => {
   const sql = 'INSERT INTO search_history (query) VALUES (?)';
-  db.query(sql, [query], callback);
+  db.query(sql, [query], (err, result) => {
+    if (err) {
+      console.error('Error executing query:', err);
+      return callback(err);
+    }
+    console.log('Query executed successfully:', result);
+    callback(null, result);
+  });
 };
 
 module.exports = {
